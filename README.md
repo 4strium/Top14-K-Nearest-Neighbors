@@ -3,16 +3,16 @@ Nous allons nous intéresser à la méthode dite des « des k plus proches voisi
 (en anglais « k nearest neighbors » ; d’où le sigle KNN).
 
 Le principe est assez simple, on dispose d’un ensemble de données, chaque donnée dispose de **deux paramètres numériques que l’on utilisera en tant qu’abscisse et ordonnée.**
-<html>
-    <span style="color: green;">(Exemples : taille, poids, couleur, …).</span>
-</html>
+
+<span style="color: green;">(Exemples : taille, poids, couleur, …).</span>
+
 Cela nous permettra de comparer les différentes données via ces paramètres, et notamment les distances qui séparent les différents points dans une représentation graphique.
 
 Mais il ne faut pas perdre de vue le but initial de l’algorithme qui est de **classifier les données de l’ensemble de manière optimisée !**
 C’est pour cela qu’intervient un troisième critère destiné à la classification d’un élément.
-<html>
-    <span style="color: green;">(Exemples : espèces de fleurs, poste des joueurs dans une équipe, …).</span>
-</html>
+
+<span style="color: green;">(Exemples : espèces de fleurs, poste des joueurs dans une équipe, …).</span>
+
 
 # Représentation
 <html>
