@@ -14,6 +14,12 @@ C’est pour cela qu’intervient un troisième critère destiné à la classifi
 # Représentation
 <html>
     <p align="center">
-        <img src="https://www.ibm.com/content/dam/connectedassets-adobe-cms/worldwide-content/cdp/cf/ul/g/ef/3a/KNN.component.l.ts=1639762044031.png/content/adobe-cms/us/en/topics/knn/jcr:content/root/table_of_contents/intro/complex_narrative/items/content_group/image" alt="KNN diagram"/>
+        <img src="https://github.com/4strium/Top14-K-Nearest-Neighbors/blob/main/representation_knn.png" alt="KNN diagram"/>
     </p>
 </html>
+
+# Cas pratique
+Nous allons maintenant nous atteler à la conception d’un programme qui indexera la taille et le poids des différents joueurs du Top14 ainsi que leur poste sur le terrain au cours de la saison 2019/2020.
+Nous nous retrouvons donc bien avec nos **deux types d’informations** :
+    1. <u>Deux données numériques destinées à la comparaison</u> de deux éléments de l’ensemble : **Taille (x) et Poids (y)**
+    2. Un <u>critère destiné à la classification</u> d’un élément : **Poste du joueur**
