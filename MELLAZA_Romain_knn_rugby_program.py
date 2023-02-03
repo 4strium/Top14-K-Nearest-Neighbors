@@ -9,7 +9,7 @@ def extractionDonnees(nomFichier='JoueursTop14.csv'):
     
     descripteurs = list(players.columns) # Je récupére les descripteurs.
 
-    return (players, descripteurs)
+    return (players, descripteurs) # On retourne un Tuple contenant les deux ensembles de données.
 
 def extraireEquipe(players, choix_equipe):
     """De l'ensemble des listes, on extrait seulement celles d'une équipe
