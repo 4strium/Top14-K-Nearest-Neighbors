@@ -27,7 +27,7 @@ Nous nous retrouvons donc bien avec nos **deux types d’informations** :
 L’objectif est tout d’abord de **représenter cet ensemble dans un graphique**, puis, par la suite, l’utilisateur sera invité à **saisir une taille et un poids arbitraire** dans le but de **créer un nouvel élément** que l’algorithme KNN devra parvenir à **classifier dans le poste le plusapproprié à la morphologie saisie !**
 
 # Programmation
-Afin de rendre plus compréhensible le programme, nous allons décomposer l’algorithme en plusieurs blocs/fonctions :
+Afin de rendre plus compréhensible le programme, nous allons décomposer l’algorithme en plusieurs blocs/fonctions.
 
 ## Importation des librairies et dépendances :
 Chaque module est utilisé dans un but bien précis.
@@ -145,5 +145,184 @@ On rappelle la formule pour calculer une distance euclidienne :
 <html>
     <p align="center">
         <img src="distance_euclidienne.png" alt="Formule Distance Euclidienne"/>
+    </p>
+</html>
+
+Par la suite on enregistrera toutes ces distances dans une liste avec la forme suivante :
+« *list_ecart* = [[distance entre les deux points, poste du joueur], [distance entre les deux points, poste du joueur], etc… ] ».
+
+```python
+def distance(x1,y1,x2,y2):
+    """Distance euclidienne entre les points de coordonnées (x1;y1) et (x2;y2)"""
+    result_dis = math.sqrt((x2-x1)**2+(y2-y1)**2)
+    return result_dis
+
+def balayage_points(data_graph, taille_user, poids_user):
+    """Calcul des distances entre le point de l'utilisateur et les points des différents postes"""
+    taille_x = data_graph[0]
+    poids_y = data_graph[1]
+    poste_val = data_graph[2]
+
+    list_ecart = list()
+
+    # On calcule la distance pour chaque élément :
+    for element in range(len(taille_x)) :
+        verdict = distance(taille_user,poids_user,taille_x[element],poids_y[element])
+        
+        # Puis on ajoute la distance ainsi que le poste actuellement étudié :
+        list_ecart.append([verdict, poste_val[element]])
+    
+    return list_ecart
+
+# Ajout du point de l'utilisateur :
+taille_saisie = int(input("Saisissez votre taille en cm :\n"))
+poids_saisie = int(input("Saisissez votre poids en kg :\n"))
+
+list_distances = balayage_points(data_for_search, taille_saisie, poids_saisie)
+```
+
+## Classifier les distances en fonction des postes :
+Grâce à la fonction suivante, **on classifie les distances en fonction du poste lié à ces dernières.**
+
+Le principe final va être de faire une **moyenne des distances pour chacun des postes,** cela nous permettra de savoir quel poste à **la distance moyenne** (avec tous ses points), **la plus faible**, cela signifiera qu’il s’agit du **poste le plus proche du point de l’utilisateur, et par conséquent de sa morphologie !**
+
+Pour calculer nos moyennes, on utilise la **méthode classique** :
+- On **additionne toutes les distances d’un même poste.**
+- On compte le **nombre d’occurrence** d’un **même poste** dans la **liste entière.**
+- On divise la première somme par la seconde, et voilà **on a notre moyenne des distances entre le point de l’utilisateur et chaque poste !**
+
+```python
+def classification(data_ecart):
+    sum_avant = 0
+    nb_avant = 0
+    sum_2emeligne = 0
+    nb_2emeligne = 0
+    sum_3emeligne = 0
+    nb_3emeligne = 0
+    sum_demi = 0
+    nb_demi = 0
+    sum_trois_quarts = 0
+    nb_trois_quarts = 0
+    sum_arriere = 0
+    nb_arriere = 0
+
+    for k in range(len(data_ecart)) :
+        if data_ecart[k][1] == 'Avant' :
+            sum_avant += data_ecart[k][0]
+            nb_avant += 1
+        elif data_ecart[k][1] == '2ème ligne' :
+            sum_2emeligne += data_ecart[k][0]
+            nb_2emeligne += 1 
+        elif data_ecart[k][1] == '3ème ligne' :
+            sum_3emeligne += data_ecart[k][0]
+            nb_3emeligne += 1
+        elif data_ecart[k][1] == 'Demi' :
+            sum_demi += data_ecart[k][0]
+            nb_demi += 1
+        elif data_ecart[k][1] == 'Trois-Quarts' :
+            sum_trois_quarts += data_ecart[k][0]
+            nb_trois_quarts += 1
+        elif data_ecart[k][1] == 'Arrière' :
+            sum_arriere += data_ecart[k][0]
+            nb_arriere += 1
+
+    list_of_all_avg = list()
+
+    avg_avant = sum_avant / nb_avant
+    list_of_all_avg.append(['Avant', avg_avant])
+    avg_2emeligne = sum_2emeligne / nb_2emeligne
+    list_of_all_avg.append(['2ème ligne', avg_2emeligne])
+    avg_3emeligne = sum_3emeligne / nb_3emeligne
+    list_of_all_avg.append(['3ème ligne', avg_3emeligne])
+    avg_demi = sum_demi / nb_demi
+    list_of_all_avg.append(['Demi', avg_demi])
+    avg_trois_quarts = sum_trois_quarts / nb_trois_quarts
+    list_of_all_avg.append(['Trois-Quarts', avg_trois_quarts])
+    avg_arriere = sum_arriere / nb_arriere
+    list_of_all_avg.append(['Arrière', avg_arriere])
+
+    return list_of_all_avg
+
+# Appel de la fonction :
+predictions = classification(list_distances)
+```
+
+## Trier la liste en fonction des distances moyennes :
+Étant donné qu’il s’agit d’une liste de liste, la méthode de tri est différente de celle habituellement utilisée…
+
+Le paramètre que va nous servir de classement est la moyenne, située en index 1 de chaque sous-liste, en index 0 se trouve le poste correspondant.
+
+Nous allons donc classer les moyennes des postes de manière croissante, en premier se situera donc le poste le plus approprié pour la morphologie saisie par l’utilisateur !
+
+En bref, cela sera **le poste le plus proche graphiquement ET littéralement** de la taille et du poids saisies !
+
+```python
+def best_post(predi):
+    predi.sort(key = lambda x: x[1])
+
+    return predi
+
+# Il s'agit donc du premier poste de la liste, d'où l'index [0][0] :
+print("Le meilleur poste pour vous dans l'équipe de",team,"est :",predictions[0][0],"\n")
+```
+
+## Afficher la représentation graphique finale (+ point de l’utilisateur) :
+Cette méthode rajoute dans un premier temps **le point saisi par l’utilisateur avec la taille et le poids en coordonnées.**
+Elle **enregistre une image du graphique.**
+Et enfin ce graphique est **affiché sur le système d’exploitation de l’utilisateur**, dans une nouvelle fenêtre !
+
+```python
+def add_point_user(taille_user, poids_user):
+    courbe.scatter(taille_user, poids_user, marker="X", c="black")
+    courbe.text(taille_user+0.2, poids_user+0.2, 'Vous')
+
+    courbe.savefig('representation_graphique.png')
+
+    courbe.show()
+
+add_point_user(taille_saisie, poids_saisie)
+```
+
+# Résultats :
+*Nous avons choisi une taille de 200cm ainsi qu’un poids de 120kg. Voyons les résultats !*
+## Avec l’équipe de « Toulouse » :
+
+> Choisissez votre équipe :
+> Toulouse
+
+>Saisissez votre taille en cm :
+>200
+
+>Saisissez votre poids en kg :
+>120
+
+>Predictions : [['2ème ligne', 8.02034973600301], ['3ème ligne', 12.645047239702293], ['Avant', 21.927130980224206], ['Trois-Quarts', 32.81354826100172], ['Arrière', 37.819285879584974], ['Demi', 44.633445691168994]]
+
+>Le meilleur poste pour vous dans l'équipe de Toulouse est : 2ème ligne
+
+<html>
+    <p align="center">
+        <img src="analyse_toulouse.png" alt="Analyse Graphique Équipe de Toulouse"/>
+    </p>
+</html>
+
+## Avec le Top14 entier :
+
+> Choisissez votre équipe :
+> Tous
+
+>Saisissez votre taille en cm :
+>200
+
+>Saisissez votre poids en kg :
+>120
+
+>Predictions : [['2ème ligne', 7.4939134019794365], ['3ème ligne', 14.759575816768264], ['Avant', 19.576766409826828], ['Trois-Quarts', 30.542780530800837], ['Arrière', 35.70250458187474], ['Demi', 41.967812668170694]]
+
+>Le meilleur poste pour vous dans l'équipe de Top14 entier est : 2ème ligne
+
+<html>
+    <p align="center">
+        <img src="analyse_top14.png" alt="Analyse Graphique TOP14 entier"/>
     </p>
 </html>
