@@ -288,17 +288,17 @@ add_point_user(taille_saisie, poids_saisie)
 ## Avec l’équipe de « Toulouse » :
 
 > Choisissez votre équipe :
-> Toulouse
+> **Toulouse**
 
 >Saisissez votre taille en cm :
->200
+> **200**
 
 >Saisissez votre poids en kg :
->120
+> **120**
 
->Predictions : [['2ème ligne', 8.02034973600301], ['3ème ligne', 12.645047239702293], ['Avant', 21.927130980224206], ['Trois-Quarts', 32.81354826100172], ['Arrière', 37.819285879584974], ['Demi', 44.633445691168994]]
+>Predictions : **[['2ème ligne', 8.02034973600301], ['3ème ligne', 12.645047239702293], ['Avant', 21.927130980224206], ['Trois-Quarts', 32.81354826100172], ['Arrière', 37.819285879584974], ['Demi', 44.633445691168994]]**
 
->Le meilleur poste pour vous dans l'équipe de Toulouse est : 2ème ligne
+>Le meilleur poste pour vous dans l'équipe de Toulouse est : **2ème ligne**
 
 <html>
     <p align="center">
@@ -309,17 +309,17 @@ add_point_user(taille_saisie, poids_saisie)
 ## Avec le Top14 entier :
 
 > Choisissez votre équipe :
-> Tous
+> **Tous**
 
 >Saisissez votre taille en cm :
->200
+> **200**
 
 >Saisissez votre poids en kg :
->120
+> **120**
 
->Predictions : [['2ème ligne', 7.4939134019794365], ['3ème ligne', 14.759575816768264], ['Avant', 19.576766409826828], ['Trois-Quarts', 30.542780530800837], ['Arrière', 35.70250458187474], ['Demi', 41.967812668170694]]
+>Predictions : **[['2ème ligne', 7.4939134019794365], ['3ème ligne', 14.759575816768264], ['Avant', 19.576766409826828], ['Trois-Quarts', 30.542780530800837], ['Arrière', 35.70250458187474], ['Demi', 41.967812668170694]]**
 
->Le meilleur poste pour vous dans l'équipe de Top14 entier est : 2ème ligne
+>Le meilleur poste pour vous dans l'équipe de Top14 entier est : **2ème ligne**
 
 <html>
     <p align="center">
