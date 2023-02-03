@@ -13,7 +13,7 @@ C’est pour cela qu’intervient un troisième critère destiné à la classifi
 # Représentation
 <html>
     <p align="center">
-        <img src="https://github.com/4strium/Top14-K-Nearest-Neighbors/blob/main/representation_knn.png" alt="KNN diagram"/>
+        <img src="representation_knn.png" alt="KNN diagram"/>
     </p>
 </html>
 
@@ -142,5 +142,8 @@ data_for_search = representation(data_team, extractionDonnees()[1])
 Via les deux fonctions suivantes nous allons calculer les différentes distances euclidiennes, entre le point saisi par l’utilisateur et tous les points des joueurs.
 
 On rappelle la formule pour calculer une distance euclidienne :
-
-$ d=√((x_2-x_1 )^2+(y_2-y_1 )^2 ) $
+<html>
+    <p align="center">
+        <img src="distance_euclidienne.png" alt="Formule Distance Euclidienne"/>
+    </p>
+</html>
