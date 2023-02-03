@@ -24,7 +24,7 @@ Nous nous retrouvons donc bien avec nos **deux types d’informations** :
 1. **Deux données numériques destinées à la comparaison** de deux éléments de l’ensemble : *Taille (x) et Poids (y)*
 2. **Un critère destiné à la classification** d’un élément : *Poste du joueur*
 
-L’objectif est tout d’abord de **représenter cet ensemble dans un graphique**, puis, par la suite, l’utilisateur sera invité à **saisir une taille et un poids arbitraire** dans le but de **créer un nouvel élément** que l’algorithme KNN devra parvenir à **classifier dans le poste le plusapproprié à la morphologie saisie !**
+L’objectif est tout d’abord de **représenter cet ensemble dans un graphique**, puis, par la suite, l’utilisateur sera invité à **saisir une taille et un poids arbitraire** dans le but de **créer un nouvel élément** que l’algorithme KNN devra parvenir à **classifier dans le poste le plus approprié à la morphologie saisie !**
 
 # Programmation
 Afin de rendre plus compréhensible le programme, nous allons décomposer l’algorithme en plusieurs blocs/fonctions.
@@ -141,7 +141,7 @@ data_for_search = representation(data_team, extractionDonnees()[1])
 ## Balayage et calcul des distances entre le point de l’utilisateur et ceux des joueurs :
 Via les deux fonctions suivantes nous allons calculer les différentes distances euclidiennes, entre le point saisi par l’utilisateur et tous les points des joueurs.
 
-On rappelle la formule pour calculer une distance euclidienne :
+On rappelle la formule pour calculer une **distance euclidienne** :
 <html>
     <p align="center">
         <img src="distance_euclidienne.png" alt="Formule Distance Euclidienne"/>
@@ -250,7 +250,7 @@ predictions = classification(list_distances)
 ## Trier la liste en fonction des distances moyennes :
 Étant donné qu’il s’agit d’une liste de liste, la méthode de tri est différente de celle habituellement utilisée…
 
-Le paramètre que va nous servir de classement est la moyenne, située en index 1 de chaque sous-liste, en index 0 se trouve le poste correspondant.
+Le paramètre qui va nous servir de classement est la moyenne, située en index 1 de chaque sous-liste, en index 0 se trouve le poste correspondant.
 
 Nous allons donc classer les moyennes des postes de manière croissante, en premier se situera donc le poste le plus approprié pour la morphologie saisie par l’utilisateur !
 
