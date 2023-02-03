@@ -86,3 +86,61 @@ else :
     print("Désolé, cette équipe n'est pas disponible...")
     exit()                                                    # On stoppe l'éxécution du code.
 ```
+
+## Représenter graphiquement le nuage de points :
+Dans cette partie nous allons utiliser la librairie Python « [MatplotLib](https://matplotlib.org/) » qui va nous permettre de réalise un nuage de points avec la taille des joueurs en abscisse et leurs poids en ordonnée !
+
+```python
+def representation(data,descripteurs):
+    global team
+    """data est une liste de joueurs avec leurs caractéristiques.
+    On extrait leur taille et poids puis on représente ces données dans un repère
+    (une couleur par type de poste la position étant déterminée par la liste des descripteurs)
+    Les types de postes sont "Avant", "2ème ligne", "3ème ligne", "Demi", "Trois-Quarts" et "Arrière" """
+    
+    taille = []
+    poids=[]
+    poste=[]
+
+    for i in range(len(data)) :
+        val_temp = data[i]
+        taille_temp = val_temp[descripteurs.index('Taille (en cm)')]
+        poids_temp = val_temp[descripteurs.index('Poids (en kg)')]
+        poste_temp = val_temp[descripteurs.index('Type poste')]
+        taille.append(taille_temp)
+        poids.append(poids_temp)
+        poste.append(poste_temp)
+        
+    # Création de la courbe :
+    title = "Analyse de l'équipe de rugby de " + team
+    courbe.title(title, fontsize=18)
+    courbe.grid(color = 'green', linestyle = '--', linewidth = 0.5)
+    courbe.xlabel('Taille (en cm)')
+    courbe.ylabel('Poids (en kg)')
+    for i in range(len(data)) :
+        if poste[i] == 'Avant' :
+            point1 = courbe.scatter(taille[i], poids[i], marker="x", c="blue")
+        if poste[i] == '2ème ligne' :
+            point2 = courbe.scatter(taille[i], poids[i], marker="+", c="red")
+        if poste[i] == '3ème ligne' :
+            point3 = courbe.scatter(taille[i], poids[i], marker="1", c="green")
+        if poste[i] == 'Demi' :
+            point4 = courbe.scatter(taille[i], poids[i], marker="o", c="purple")
+        if poste[i] == 'Trois-Quarts' :
+            point5 = courbe.scatter(taille[i], poids[i], marker="*", c="brown")
+        if poste[i] == 'Arrière' :
+            point6 = courbe.scatter(taille[i], poids[i], marker="^", c="orange")
+    courbe.legend([point1, point2, point3, point4, point5, point6],['Avant','2ème ligne','3ème ligne','Demi','Trois-Quarts','Arrière'], shadow=True, title=team, title_fontsize=15, loc='lower right')
+    
+    return (taille, poids, poste)
+
+# Appel de la fonction :
+data_for_search = representation(data_team, extractionDonnees()[1])
+```
+
+## Balayage et calcul des distances entre le point de l’utilisateur et ceux des joueurs :
+Via les deux fonctions suivantes nous allons calculer les différentes distances euclidiennes, entre le point saisi par l’utilisateur et tous les points des joueurs.
+
+On rappelle la formule pour calculer une distance euclidienne :
+
+$ d=√((x_2-x_1 )^2+(y_2-y_1 )^2 ) $
